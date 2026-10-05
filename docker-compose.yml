@@ -1,0 +1,53 @@
+version: '3.8'
+
+# ============================================================
+# ENTERPRISE NEXT.JS + POSTGRESQL DOCKER COMPOSE
+# ============================================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: luxe-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-luxe_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-luxe_secure_password_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-luxe_commerce}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U luxe_admin -d luxe_commerce"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - luxe-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: luxe-web-prod
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-luxe_admin}:${POSTGRES_PASSWORD:-luxe_secure_password_2026}@postgres:5432/${POSTGRES_DB:-luxe_commerce}?schema=public
+      - NEXT_TELEMETRY_DISABLED=1
+      - PUBLIC_DOMAIN=${PUBLIC_DOMAIN:-https://luxe.example.com}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - luxe-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  luxe-network:
+    driver: bridge

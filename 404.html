@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | LUXÉ</title>
+    <meta name="description" content="The page you are looking for does not exist. Explore LUXÉ homepage and main destinations.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+            background: #0a0a0f;
+        }
+        .error-card {
+            background: rgba(18, 18, 26, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+        .error-code {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(4rem, 12vw, 7.5rem);
+            font-weight: 800;
+            line-height: 1;
+            color: #d4af37;
+            margin-bottom: 16px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+        .error-title {
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #ffffff;
+        }
+        .error-desc {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <a href="#errorCard" class="skip-link">Skip to error message</a>
+    <main class="error-wrapper">
+        <section class="error-card" id="errorCard">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-desc">The luxury experience or resource you requested has been relocated or is temporarily unavailable. Let us guide you back.</p>
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">Return to Homepage</a>
+                <a href="index.html#contact" class="btn btn-glass">Contact Concierge</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

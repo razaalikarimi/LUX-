@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /health
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://luxe.example.com/sitemap.xml

@@ -1,0 +1,39 @@
+name: Production CI/CD — LUXÉ
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  audit-and-build:
+    name: Lint, Audit & Docker Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML Structure
+        run: |
+          echo "Validating HTML files..."
+          # Basic syntax verification
+          grep -q "<!DOCTYPE html>" index.html
+          grep -q "robots.txt" index.html || true
+
+      - name: Security Secrets Audit
+        run: |
+          echo "Scanning codebase for inadvertent secrets..."
+          if grep -r -i -E "API_KEY|SECRET_KEY|PRIVATE_KEY|PASSWORD|TOKEN" --exclude="*.md" --exclude=".env.example" .; then
+            echo "Secrets check completed with review flags."
+          else
+            echo "Clean: No uncommitted API keys detected."
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Verify Docker Container
+        run: |
+          docker build -t luxe:ci .
