@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this release record.
 
+## [v1.1.1] - 2026-10-12
+### Improved
+- **Lifecycle Execution**: Hardened client runtime initialization against asynchronous and deferred script execution states.
+- **Interaction Stability**: Enhanced rendering loop stability across interactive WebGL canvas viewports.
+
 ## [v1.1.0] - 2026-10-05
 ### Added
 - **Three.js 3D Flacon Atelier**: Real-time WebGL interactive 3D Baccarat crystal flacon viewer with glass transmission refraction, internal amber elixir core, floating 24K gold suspension particles, and guilloché gold cap.
