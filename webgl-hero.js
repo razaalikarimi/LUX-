@@ -1070,7 +1070,7 @@
   // =========================================================================
   // INITIALIZATION
   // =========================================================================
-  document.addEventListener('DOMContentLoaded', () => {
+  function initEngine() {
     initSmoothScroll();
     initBrandIntro();
     initCinematicScroll();
@@ -1081,6 +1081,12 @@
     initAccordSelector();
     init3DFlaconModal();
     initVaultCardTilt();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEngine, { once: true });
+  } else {
+    initEngine();
+  }
 
 })();
